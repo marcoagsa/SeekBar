@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         yourcoins.setText("Your Coins = " + sbar1.getProgress() +" / " + sbar1.getMax() );
 
         yourbet = (TextView)findViewById(R.id.YourBet);
-        yourbet.setText("Your Bet = " + sbar2.getProgress() +" / " + sbar2.getMax() );
+        yourbet.setText("Your Bet = " + sbar2.getProgress() + " / " + sbar2.getMax());
 
         sbar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             //public int progress_value;
@@ -49,12 +49,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if (progress_value[0] == 0){
+            sbar2.setMax(6);
+        }else if (progress_value[0]==1){
+            sbar2.setMax(5);
+        }else if (progress_value[0]==2){
+            sbar2.setMax(5);
+        }else if (progress_value[0]==3){
+            sbar2.setMax(4);
+        }
 
         sbar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 progress_value2[0] = progress_value[0] + progress;
+
                 yourbet.setText("Your Bet = " + progress_value2[0] + " / " + sbar2.getMax());
             }
 
