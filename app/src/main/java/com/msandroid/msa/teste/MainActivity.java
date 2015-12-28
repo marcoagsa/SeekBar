@@ -19,8 +19,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void seekBarr () {
+
         final int[] progress_value = new int[1];
-        final int[] progress_value2 = {0};
+        final int[] progress_value2 = new int[1];
+
         sbar1 = (SeekBar)findViewById(R.id.seekBar);
         sbar2 = (SeekBar)findViewById(R.id.seekBar2);
 
@@ -28,10 +30,11 @@ public class MainActivity extends AppCompatActivity {
         yourcoins.setText("Your Coins = " + sbar1.getProgress() +" / " + sbar1.getMax() );
 
         yourbet = (TextView)findViewById(R.id.YourBet);
-        yourbet.setText("Your Bet = " + sbar2.getProgress() + " / " + sbar2.getMax());
+        yourbet.setText("Your Bet = " + sbar2.getProgress() + " / 6 " );
+
+        sbar2.setEnabled(false);
 
         sbar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            //public int progress_value;
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -39,10 +42,14 @@ public class MainActivity extends AppCompatActivity {
                 yourcoins.setText("Your Coins = " + progress_value[0] + " / " + sbar1.getMax());
                 sbar2.setProgress(progress_value[0]);
                 yourbet.setText("Your Bet = " + progress_value[0] + " / 6 " );
+
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                sbar2.setEnabled(true);
+                sbar2.setProgress(progress_value[0]);
+                yourbet.setText("Your Bet = " + progress_value[0] + " / 6 " );
 
             }
 
@@ -66,9 +73,8 @@ public class MainActivity extends AppCompatActivity {
                     sbar2.setMax(4);
                 }else if (progress_value[0]== 3){
                     sbar2.setMax(3);
-                }else
-                    sbar2.setMax(6);
-
+                    sbar2.setProgress(3);
+                }
 
                 progress_value2[0] = progress_value[0] + progress;
 
